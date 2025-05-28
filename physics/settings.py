@@ -68,7 +68,7 @@ from corsheaders.defaults import default_headers
 # ✅ CORS configuration
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',  # your Next.js frontend local
+
     'https://kngc-physics.vercel.app/',
 ]
 
@@ -199,5 +199,6 @@ EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+# EMAIL_HOST_PASSWORD = 'tlve dvwt htxc cbjw'  # Your email password
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
