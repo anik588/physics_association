@@ -12,36 +12,36 @@ export default function EditAccountPage() {
   const [error, setError] = useState(null);
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/api/user/`, {
-          credentials: 'include',
-          cache: 'no-store',
-        });
+ useEffect(() => {
+  const fetchUser = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/api/user/`, {
+        credentials: 'include',
+        cache: 'no-store',
+      });
 
-
-        if (!res.ok) {
-          setError('Failed to fetch user data');
-          return;
-        }
-
-        const data = await res.json();
-        setUserData({
-          email: data.email || '',
-          bio: data.bio || '',
-          profile_picture: data.profile_picture || '',
-        });
-      } catch (err) {
+      if (!res.ok) {
         setError('Failed to fetch user data');
-      } finally {
-        setLoading(false);
+        return;
       }
-    };
 
-    fetchUser();
-  }, []);
+      const data = await res.json();
+      setUserData({
+        email: data.email || '',
+        bio: data.bio || '',
+        profile_picture: data.profile_picture || '',
+      });
+    } catch {
+      setError('Failed to fetch user data');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchUser();
+}, []);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
