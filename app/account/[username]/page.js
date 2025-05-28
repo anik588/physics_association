@@ -11,11 +11,13 @@ export default function AccountPage() {
   const [pendingContent, setPendingContent] = useState([]);
   const router = useRouter();
 
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
   useEffect(() => {
     const fetchUserData = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`http://localhost:8000/auth/api/user/${username}/`, {
+        const res = await fetch(`${API_BASE_URL}/auth/api/user/${username}/`, {
           credentials: 'include',
           cache: 'no-store',
         });
@@ -31,7 +33,7 @@ export default function AccountPage() {
 
         if (data.role === 'TEACHER') {
           // Fetch unapproved content for teachers
-          const pendingRes = await fetch(`http://localhost:8000/auth/api/teacher/pending/`, {
+          const pendingRes = await fetch(`${API_BASE_URL}/auth/api/teacher/pending/`, {
             credentials: 'include',
           });
           const pendingData = await pendingRes.json();
@@ -46,11 +48,11 @@ export default function AccountPage() {
     };
 
     fetchUserData();
-  }, [username]);
+  }, [username, API_BASE_URL]);
 
   const handleApprove = async (model, id) => {
     try {
-      const res = await fetch(`http://localhost:8000/auth/api/teacher/approve/${model}/${id}/`, {
+      const res = await fetch(`${API_BASE_URL}/auth/api/teacher/approve/${model}/${id}/`, {
         method: 'POST',
         credentials: 'include', // Include session cookies for authentication
       });
@@ -58,13 +60,11 @@ export default function AccountPage() {
       const data = await res.json();
       if (res.ok) {
         alert('Content approved');
-        // Optionally, you can refetch the pending content to update the list
-        setPendingContent(prev => {
-          return {
-            ...prev,
-            [model]: prev[model].filter(item => item.id !== id),
-          };
-        });
+        // Optionally, refetch or update pending content state
+        setPendingContent(prev => ({
+          ...prev,
+          [model]: prev[model].filter(item => item.id !== id),
+        }));
       } else {
         alert(data.error || 'Failed to approve content');
       }
@@ -124,7 +124,7 @@ export default function AccountPage() {
 
                         {/* Dynamic Approve Button */}
                         <button
-                          onClick={() => handleApprove(type, item.id)}  // Dynamically passing model type and item ID
+                          onClick={() => handleApprove(type, item.id)}
                           className="text-green-600 hover:underline"
                         >
                           Approve
@@ -140,9 +140,6 @@ export default function AccountPage() {
           )}
         </section>
       )}
-
-      {/* Other Sections (Blogs, Notes, etc.) */}
-      {/* You can add these sections as you did before */}
     </div>
   );
 }
