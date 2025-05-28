@@ -68,7 +68,8 @@ from corsheaders.defaults import default_headers
 # ✅ CORS configuration
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',  # your Next.js frontend
+    'http://localhost:3000',  # your Next.js frontend local
+    'https://kngc-physics.vercel.app/',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
