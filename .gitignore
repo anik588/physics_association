@@ -86,3 +86,10 @@ env/
 
 # Git
 .git/
+
+
+/staticfiles/
+/media/
+/node_modules/
+/.next/
+/out/
