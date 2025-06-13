@@ -56,17 +56,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-<<<<<<< HEAD
 # Redirect URL after login
 LOGIN_REDIRECT_URL = '/'
 
-# Redirect URL after logout
-LOGOUT_REDIRECT_URL = '/login/'
-=======
-
-# Redirect URL after logout
-LOGOUT_REDIRECT_URL = '/auth/login/'
->>>>>>> 36b8bace (Initial commit)
 
 from corsheaders.defaults import default_headers
 
@@ -74,13 +66,8 @@ from corsheaders.defaults import default_headers
 # ✅ CORS configuration
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
-<<<<<<< HEAD
-
-    'https://kngc-physics.vercel.app/',
-=======
-    "http://localhost:3000",
-
->>>>>>> 36b8bace (Initial commit)
+    'https://kngc-physics.vercel.app',
+    'http://localhost:3000',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -88,6 +75,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'X-CSRFToken',
 ]
+
 
 SESSION_COOKIE_SAMESITE = "Lax"
 SESSION_COOKIE_SECURE = False  # True only if using HTTPS
@@ -140,7 +128,6 @@ WSGI_APPLICATION = 'physics.wsgi.application'
 
 
 
-<<<<<<< HEAD
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -158,7 +145,7 @@ DATABASES = {
     'default': dj_database_url.config(default=config('DATABASE_URL'))
 }
 
-=======
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -176,7 +163,7 @@ DATABASES = {
 #     'default': dj_database_url.config(default=config('DATABASE_URL'))
 # }
 
->>>>>>> 36b8bace (Initial commit)
+
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
